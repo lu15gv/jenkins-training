@@ -9,13 +9,13 @@ pipeline {
         skipDefaultCheckout()
     }
 
-    stages {
+    stage {
         steps('Stage name') {
             echo 'Stage 1 started'
         }
     }
 
-    stages {
+    stage {
         steps('Pod install') {
             steps {
                 echo 'Installing pods'
@@ -24,7 +24,7 @@ pipeline {
         }
     }
 
-    stages {
+    stage {
         steps('Build and test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
