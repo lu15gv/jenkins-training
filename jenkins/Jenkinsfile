@@ -2,10 +2,22 @@ pipeline {
     //agent any
     agent { label 'master' }
 
+    environment {
+        OUTPUT_DIRECTORY = ".output"
+    }
+
     stages {
-        stage('Stage name 1') {
+        stage('Pod install') {
             steps {
-                echo 'Stage 1 started'
+                echo 'Installing pods...'
+                sh 'pod install'
+            }
+        }
+        stage('Build and test') {
+            steps {
+                //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh 'fastlane build_and_unit_test configuration:Debug'
+                //}
             }
         }
     }
@@ -19,6 +31,8 @@ pipeline {
         }
     	always {
             echo 'CI finished'
+            echo 'Saving artifacts ...'
+            archiveArtifacts artifacts: "${OUTPUT_DIRECTORY}/*.*"
     	}
     }
 }

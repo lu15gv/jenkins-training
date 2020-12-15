@@ -16,8 +16,13 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of the lane"
-  lane :do_something do
-    puts "fastlane"
+  desc "Build and run all unit test"
+  lane :build_and_unit_test do |options|
+    scan(scheme: "jenkinsTraining",
+      workspace: "jenkinsTraining.xcworkspace",
+      skip_testing: "jenkinsTrainingUITests",
+      output_directory: "#{ENV['OUTPUT_DIRECTORY']}",
+      configuration: options[:configuration]
+      )
   end
 end
