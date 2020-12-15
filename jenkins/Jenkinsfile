@@ -22,7 +22,7 @@ pipeline {
         stage('Build and test') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'build_and_unit_test'
+                    sh 'fastlane build_and_unit_test'
                 }
             }
         }
