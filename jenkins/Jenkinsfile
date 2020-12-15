@@ -1,45 +1,23 @@
 pipeline {
     agent any
 
-    environment {
-        OUTPUT_DIRECTORY = ".output"
-    }
-
     stages {
-        stage('Stage name') {
+        stage('Stage name 1') {
             steps {
                 echo 'Stage 1 started'
-            }
-        }
-
-        stage('Pod install') {
-            steps {
-                echo 'Installing pods'
-                    sh 'pod install'
-            }
-        }
-
-        stage('Build and test') {
-            steps {
-                //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'fastlane build_and_unit_test configuration:Debug'
-                //}
             }
         }
     }
 
     post {
         success {
-            echo 'CI exitóso'
+            echo 'Yuhuuuu'
         }
         failure {
-            echo 'CI fallído'
+            echo 'Ouch'
         }
     	always {
-            //echo 'CI terminó'
-            echo 'Saving artifacts ...'
-            archiveArtifacts artifacts: "${OUTPUT_DIRECTORY}/*.*"
-            //cleanWs()
+            echo 'CI finished'
     	}
     }
 }
