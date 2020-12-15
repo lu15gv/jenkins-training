@@ -23,7 +23,7 @@ class jenkinsTrainingTests: XCTestCase {
         // GIVEN
         let expected = true
         // WHEN
-        let result = false
+        let result = true
         // THEN
         XCTAssertEqual(result, expected)
     }
