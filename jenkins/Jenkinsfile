@@ -5,23 +5,25 @@ pipeline {
         OUTPUT_DIRECTORY = ".output"
     }
 
-    stage {
-        steps('Stage name') {
-            echo 'Stage 1 started'
+    stages {
+        stage('Stage name') {
+            steps {
+                echo 'Stage 1 started'
+            }
         }
-    }
 
-    stage {
-        steps('Pod install') {
-            echo 'Installing pods'
-                sh 'pod install'
+        stage('Pod install') {
+            steps {
+                echo 'Installing pods'
+                    sh 'pod install'
+            }
         }
-    }
 
-    stage {
-        steps('Build and test') {
-            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                sh 'build_and_unit_test'
+        stage('Build and test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'build_and_unit_test'
+                }
             }
         }
     }
