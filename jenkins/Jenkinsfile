@@ -1,6 +1,6 @@
 pipeline {
     //agent any
-    agent { label 'master' }
+    agent { label '!master' }
 
     environment {
         OUTPUT_DIRECTORY = ".output"
@@ -33,6 +33,7 @@ pipeline {
             echo 'CI finished'
             echo 'Saving artifacts ...'
             archiveArtifacts artifacts: "${OUTPUT_DIRECTORY}/*.*"
+            cleanWs()
     	}
     }
 }
